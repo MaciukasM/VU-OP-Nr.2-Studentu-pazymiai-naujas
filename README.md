@@ -4,7 +4,7 @@
 
 ## Versijos
 
-* [v0.1](https://github.com//releases/tag/v0.1): pirmoji programos versija, kurioje nuskaitomi studentų duomenys bei išvedamas jų galutinis balas. Šiam skaičiavimui gali būti pasitelkta mediana arba vidurkis. Pažymių įvedimo metu programa veikia net ir nežinant pažymių skaičiaus, jų įvedimą galima sustabdyti įvedant -1. Pažymiai taip pat gali būti generuojami atsitiktinai. Be to, yra dvi šios programos versijos, kurios skiriasi duomenų saugojimu - vienoje duomenys saugojami masyvuose, kitoje - vektoriuose.
+* [v0.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.1): pirmoji programos versija, kurioje nuskaitomi studentų duomenys bei išvedamas jų galutinis balas. Šiam skaičiavimui gali būti pasitelkta mediana arba vidurkis. Pažymių įvedimo metu programa veikia net ir nežinant pažymių skaičiaus, jų įvedimą galima sustabdyti įvedant -1. Pažymiai taip pat gali būti generuojami atsitiktinai. Be to, yra dvi šios programos versijos, kurios skiriasi duomenų saugojimu - vienoje duomenys saugojami masyvuose, kitoje - vektoriuose.
 
 ## Diegimas
 
