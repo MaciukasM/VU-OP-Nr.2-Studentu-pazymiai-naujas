@@ -232,7 +232,7 @@ int main() {
   } while(KitasStudentas == "t");
 
   //Isvedimas
-  cout<<left<<setw(13)<<"Vardas"<<setw(17)<<"Pavarde";
+  cout<<left<<setw(13)<<"Vardas"<<setw(16)<<"Pavarde";
   if(Vidurkis == "t") cout<<"Galutinis (Vid.)"<<endl;
   else cout<<"Galutinis (Med.)"<<endl;
   
@@ -240,7 +240,7 @@ int main() {
 
   for (auto s : studentai)
   {
-    cout<<left<<setw(13)<<s.vardas<<setw(17)<<s.pavarde<<setprecision(3)<<s.galutinis<<endl;
+    cout<<left<<setw(13)<<s.vardas<<setw(16)<<s.pavarde<<setprecision(3)<<s.galutinis<<endl;
   }
 
   return 0;
