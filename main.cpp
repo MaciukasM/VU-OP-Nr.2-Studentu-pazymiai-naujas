@@ -188,6 +188,7 @@ void NuskaitykDuomenis (string DuomFailas, vector <Studentas>&studentai, bool &A
       studentai.push_back(s);
     }
     failas.close();
+    cout<<"Duomenys nuskaityti."<<endl;
   }
   else 
   {
