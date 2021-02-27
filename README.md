@@ -5,6 +5,7 @@
 ## Versijos
 
 * [v0.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.1): pirmoji programos versija, kurioje nuskaitomi studentų duomenys bei išvedamas jų galutinis balas. Šiam skaičiavimui gali būti pasitelkta mediana arba vidurkis. Pažymių įvedimo metu programa veikia net ir nežinant pažymių skaičiaus, jų įvedimą galima sustabdyti įvedant -1. Pažymiai taip pat gali būti generuojami atsitiktinai. Be to, yra dvi šios programos versijos, kurios skiriasi duomenų saugojimu - vienoje duomenys saugojami masyvuose, kitoje - vektoriuose.
+* [v0.2](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.2): antroji programos versija, kurioje galima pasirinkti, ar norima nuskaityti duomenis iš failo. Studentų duomenys yra surūšiuojami pagal jų vardus (jei jie vienodi, tada pagal pavardę).
 
 ## Diegimas
 
@@ -12,7 +13,14 @@ Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite
 
 ## Programos veikimas
 
-Paleidus programą vartotojo prašoma įvesti studento vardą ir pavardę:
+Paleidus programą vartotojo klausiama, ar jis norėtų duomenis nuskaityti iš failo "kursiokai.txt": 
+```shell
+Ar noretumete studentu duomenis nuskaityti is failo 'kursiokai.txt'? Iveskite t/n:
+n
+```
+Jei vartotojas įvestų t, tuomet duomenys būtų automatiškai nuskaitomi (jei failas egzistuoja) ir išvedami į dokumentą "rez.txt".
+
+Kitu atveju, vartotojo prašoma įvesti studento vardą ir pavardę:
 ```shell
 Iveskite studento varda:
 Mantas
