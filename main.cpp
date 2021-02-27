@@ -240,7 +240,7 @@ int main() {
     }
     else cout<<"Tuomet iveskite visus duomenis ranka: "<<endl<<endl;
   }
-  else if (ArReikiaIvesti)
+  if (ArReikiaIvesti)
   {
     string KitasStudentas; //tikrinimui, ar yra kitas studentas
     string kiekNd; //tikrinimui, ar namu darbu pazymiu skaicius zinomas
@@ -326,6 +326,7 @@ int main() {
   //Isvedimas kai ivedama ranka
   if (ArReikiaIvesti)
   {
+    std::sort(studentai.begin(),studentai.end(), PagalVardus);
     cout<<left<<setw(16)<<"Vardas"<<setw(19)<<"Pavarde"<<setw(20)<<"Galutinis (Vid.)"<<"Galutinis (Med.)"<<endl;
   
     cout<<"---------------------------------------------------------------------------"<<endl;
