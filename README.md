@@ -6,10 +6,11 @@
 
 * [v0.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.1): pirmoji programos versija, kurioje nuskaitomi studentų duomenys bei išvedamas jų galutinis balas. Šiam skaičiavimui gali būti pasitelkta mediana arba vidurkis. Pažymių įvedimo metu programa veikia net ir nežinant pažymių skaičiaus, jų įvedimą galima sustabdyti įvedant -1. Pažymiai taip pat gali būti generuojami atsitiktinai. Be to, yra dvi šios programos versijos, kurios skiriasi duomenų saugojimu - vienoje duomenys saugojami masyvuose, kitoje - vektoriuose.
 * [v0.2](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.2.1): antroji programos versija, kurioje galima pasirinkti, ar norima nuskaityti duomenis iš failo (tuomet jie bus išvedami į failą "rez.txt". Studentų duomenys yra surūšiuojami pagal jų vardus (jei jie vienodi, tada pagal pavardę).
+* [v0.3](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.3): trečioji programos versija, kurioje funkcijos ir struktūros perkeltos į atitinkamus .h arba .cpp failus. Taip pat panaudotas išimčių valdymas (su try/catch, std::vector.at()).
 
 ## Diegimas
 
-Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp failą(-us) iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais). Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
+Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais). Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
 
 ## Programos veikimas
 
