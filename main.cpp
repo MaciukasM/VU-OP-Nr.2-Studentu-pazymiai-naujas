@@ -9,9 +9,7 @@ int main() {
 
   string DuomFailas = "kursiokai.txt";
   bool ArReikiaIvesti = true;
-  
-  try
-  {
+
     if (ArEgzistuoja(DuomFailas))
     {
       cout<<"Ar noretumete studentu duomenis nuskaityti is failo 'kursiokai.txt'? Iveskite t/n:"<<endl;
@@ -95,15 +93,21 @@ int main() {
             s.pazymiuSk = s.pazymiai.size();
           }
         }
-        s.ndVid = RaskVidurki(s.pazymiai, s.pazymiuSk);
-        s.galutinis = GalutinisBalas(s.ndVid, s.egzaminas);
+        try{
+          s.ndVid = RaskVidurki(s.pazymiai, s.pazymiuSk);
+          s.galutinis = GalutinisBalas(s.ndVid, s.egzaminas);
 
-        s.mediana = RaskMediana(s.pazymiai, s.pazymiuSk);
-        s.galutinisMed = GalutinisBalas(s.mediana, s.egzaminas);
+          s.mediana = RaskMediana(s.pazymiai, s.pazymiuSk);
+          s.galutinisMed = GalutinisBalas(s.mediana, s.egzaminas);
 
-        cout<<"Ar bus daugiau studentu? Iveskite t/n: "<<endl;
-        KitasStudentas = AtsakymoIvedimas();
-        studentai.push_back(s);
+          cout<<"Ar bus daugiau studentu? Iveskite t/n: "<<endl;
+          KitasStudentas = AtsakymoIvedimas();
+          studentai.push_back(s);
+        }
+        catch (std::domain_error klaida)
+        {
+          cout<<klaida.what();
+        }
       } while(KitasStudentas == "t");
     }
 
@@ -113,8 +117,3 @@ int main() {
 
     return 0;
   }
-  catch(std::exception &klaida)
-  {
-    std::cerr << klaida.what() << endl;
-  }
-}
