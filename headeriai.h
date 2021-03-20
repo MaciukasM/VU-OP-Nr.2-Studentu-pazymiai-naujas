@@ -22,6 +22,8 @@ using std::setprecision;
 using std::vector;
 using std::ifstream;
 using std::istringstream;
+using std::ostringstream;
+using std::to_string;
 
 //atsitiktiniams skaiciams
 using std::mt19937;
@@ -39,10 +41,12 @@ int IvedimasIntervale(int pradzia, int pabaiga, bool Breakinimui);
 double RaskVidurki (vector<int> pazymiai, int pazymiuSk);
 double RaskMediana (vector<int> pazymiai, int pazymiuSk);
 double GalutinisBalas(double ndRez, int egzaminas);
-int GeneruokAtsitiktiniSkaiciu(int pradzia, int pabaiga);
+void GeneruokPazymius(Studentas &s);
 void NuskaitykDuomenis (string DuomFailas, vector <Studentas>&studentai, bool &ArReikiaIvesti);
 bool PagalVardus(Studentas s1, Studentas s2);
-void DuomenuIsvedimasFaile (vector <Studentas>studentai);
+void DuomenuIsvedimasFaile (vector <Studentas>studentai, string failas);
 void IprastinisDuomIsvedimas (vector <Studentas>studentai);
+void GeneruokFaila(int dydis);
+void ProgramosSparta();
 
 #endif
