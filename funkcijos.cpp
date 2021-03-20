@@ -1,5 +1,6 @@
 #include "headeriai.h"
 #include "struktura.h"
+#include "laikas.h"
 
 //funkcija simboliu isvalymui, kai irasytas netinkamas simbolis
 void NeteisingasIvedimas()
@@ -103,19 +104,22 @@ double GalutinisBalas(double ndRez, int egzaminas)
   return galutinis;
 }
 
-//funkcija atsitiktiniams skaiciams generuoti
-int GeneruokAtsitiktiniSkaiciu(int pradzia, int pabaiga) //pradzia/pabaiga - intervalo reziai
+//funkcija atsitiktiniams pazymiams (ir ju skaiciui) generuoti
+void GeneruokPazymius(Studentas &s) //pradzia/pabaiga - intervalo reziai
 {
   mt19937 mt(static_cast<int>(Laikas::now().time_since_epoch().count()));
-  intDistribution Paskirstyk(pradzia, pabaiga);
+  intDistribution Paskirstyk(0, 10);
 
-  int skaicius = Paskirstyk(mt);
-  cout<<skaicius<<" ";
-  return skaicius;
+  s.egzaminas = Paskirstyk(mt);
+  s.pazymiuSk = Paskirstyk(mt)*2;
+  for (int i = 0; i < s.pazymiuSk; i++)
+  {
+    s.pazymiai.push_back(Paskirstyk(mt));
+  }
 }
 
 //funkcija duomenu nuskaitymui is failo
-void NuskaitykDuomenis (string DuomFailas, vector <Studentas>&studentai, bool &ArReikiaIvesti)
+void NuskaitykDuomenis(string DuomFailas, vector <Studentas>&studentai, bool &ArReikiaIvesti)
 {
   ifstream failas(DuomFailas);
   if (failas.is_open())
@@ -159,13 +163,14 @@ void NuskaitykDuomenis (string DuomFailas, vector <Studentas>&studentai, bool &A
     failas.close();
     cout<<"Duomenys nuskaityti."<<endl;
   }
-  else 
+  else if (ArReikiaIvesti)
   {
     cout<<"Nepavyko nuskaityti duomenu."<<endl;
     cout<<"Ar norite ranka ivesti duomenis? (t - ivesti duomenis, n - uzbaigti programos darba) Iveskite t/n:"<<endl;
     string ProgramosTesinys = AtsakymoIvedimas();
     if (ProgramosTesinys == "n") exit(1);
   }
+  else throw std::runtime_error("Nepavyko atidaryti failo");
 }
 
 //funkcija rusiavimui pagal vardus (jei vardai sutampa, tai pagal pavardes)
@@ -177,19 +182,19 @@ bool PagalVardus(Studentas s1, Studentas s2)
 }
 
 //funkcija duomenu isvedimui i faila
-void DuomenuIsvedimasFaile (vector <Studentas>studentai)
+void DuomenuIsvedimasFaile (vector <Studentas>studentai, string failas)
 {
-  std::ostringstream Isvedimas;
+  ostringstream Isvedimas;
   Isvedimas<<"Vardas          Pavarde            Galutinis (Vid.)    Galutinis (Med.)\n";
   Isvedimas<<"-----------------------------------------------------------------------\n";
   for (auto s : studentai)
   {
     Isvedimas<<left<<setw(16)<<s.vardas<<setw(19)<<s.pavarde<<setw(20)<<setprecision(3)  <<s.galutinis<<setprecision(3)<<s.galutinisMed<<endl;
   }
-  std::ofstream Rezultatas("rez.txt");
+  std::ofstream Rezultatas(failas);
   Rezultatas<<Isvedimas.str();
   Rezultatas.close();
-  cout<<"Duomenys isvesti i faila 'rez.txt'."<<endl;
+  cout<<"Duomenys isvesti i faila '"<<failas<<"'."<<endl;
 }
 
 //funkcija duomenu isvedimui i ekrana
@@ -203,5 +208,125 @@ void IprastinisDuomIsvedimas (vector <Studentas>studentai)
   for (auto s : studentai)
   {
     cout<<left<<setw(16)<<s.vardas<<setw(19)<<s.pavarde<<setw(20)<<setprecision(3)  <<s.galutinis<<setprecision(3)<<s.galutinisMed<<endl;
+  }
+}
+
+//failu generavimo funkcija
+void GeneruokFaila(int dydis)
+{
+  Studentas s;
+
+  ostringstream duomenys;
+  duomenys<<left<<setw(16)<<"Vardas"<<setw(25)<<"Pavarde"<<endl;
+  
+  for (int i = 1; i <= dydis; i++)
+  {
+    s.vardas = "Vardas"+to_string(i);
+    s.pavarde = "Pavarde"+to_string(i);
+
+    duomenys<<left<<setw(16)<<s.vardas<<setw(25)<<s.pavarde;
+
+    s.pazymiai.clear();
+    GeneruokPazymius(s);
+    for (int j = 0; j<s.pazymiuSk;j++)
+    {
+      duomenys<<left<<setw(4)<<s.pazymiai[j];
+    }
+    duomenys<<setw(4)<<s.egzaminas<<endl;
+  }
+
+  string DuomFailas = "Sugeneruotas" + to_string(dydis) + ".txt";
+  std::ofstream Isvedimas(DuomFailas);
+  Isvedimas<<duomenys.str();
+  Isvedimas.close();
+  cout<<"Sugeneruotas "<<dydis<<" dydzio failas."<<endl;
+}
+
+//programos benchmark (programos spartos nustatymo) funkcija
+void ProgramosSparta()
+{
+  vector <Studentas>studentai;
+  double visasLaikas; //galutiniam testo laikui pateikti
+  bool temp=false; //kintamasis kad veiktu funkcija
+  string rezFailas; //isvedimui gerieciu/blogieciu
+  string ProgramosTesinys; //tikrinimui, ar vartotojas nori pratesti testa
+  LaikoMatavimas laikas;
+  for (int i = 1000; i<=10000000; i*=10)
+  {
+    visasLaikas = 0;
+    cout<<"\nProgramos veikimo spartos testas su "<<i<<" studentu pradetas.\n"<<endl;
+
+    laikas.reset();
+    studentai.reserve(i);
+    
+    //failo generavimas
+    GeneruokFaila(i);
+    cout<<i<<" studentu failo generavimas uztruko "<<laikas.elapsed()<<" s."<<endl;
+    visasLaikas+=laikas.elapsed();
+    laikas.reset();
+    //failo generavimas
+
+    //failo nuskaitymas
+    string DuomFailas="Sugeneruotas"+to_string(i)+".txt";
+    NuskaitykDuomenis(DuomFailas, studentai, temp);
+    cout<<"Duomenu ("<<i<<" studentu) nuskaitymas is failo uztruko "<<laikas.elapsed()<<" s."<<endl;
+    visasLaikas+=laikas.elapsed();
+    laikas.reset();
+    //failo nuskaitymas
+
+    //studentu rusiavimas i dvi grupes
+    vector <Studentas>gerieciai;
+    vector <Studentas>blogieciai;
+    gerieciai.reserve(i);
+    blogieciai.reserve(i);
+    for (int j = 0; j<i; j++)
+    {
+      if(studentai[j].galutinis < 5)
+      {
+        blogieciai.push_back(studentai[j]);
+      }
+      else gerieciai.push_back(studentai[j]);
+    }
+    studentai.clear();
+    cout<<i<<" studentu rusiavimas (kartu su pirmojo vektoriaus panaikinimu) uztruko "<<laikas.elapsed()<<" s."<<endl;
+    visasLaikas+=laikas.elapsed();
+    laikas.reset();
+    //studentu rusiavimas i dvi grupes
+
+    //"gerieciu" isvedimas i faila
+    rezFailas = "Atsakymai/rez_gerieciai"+to_string(i)+".txt";
+    DuomenuIsvedimasFaile(gerieciai, rezFailas);
+    cout<<i<<" studentu (gerieciu) isvedimas i faila '"<<rezFailas<<"' uztruko "<<laikas.elapsed()<<" s."<<endl;
+    visasLaikas+=laikas.elapsed();
+    laikas.reset();
+    //"gerieciu" isvedimas i faila
+
+    //"blogieciu" isvedimas i faila
+    rezFailas = "Atsakymai/rez_blogieciai"+to_string(i)+".txt";
+    DuomenuIsvedimasFaile(blogieciai, rezFailas);
+    cout<<i<<" studentu (blogieciu) isvedimas i faila '"<<rezFailas<<"' uztruko "<<laikas.elapsed()<<" s."<<endl<<endl;
+    visasLaikas+=laikas.elapsed();
+    //"blogieciu" isvedimas i faila
+
+    //viso testo laiko Isvedimas
+    cout<<i<<" irasu testas uztruko "<<visasLaikas<<" s."<<endl<<endl;
+    //viso testo laiko Isvedimas
+
+    if (i!=10000000)
+    {
+      int a = i*10;
+      cout<<"Ar norite toliau testuoti (kitas testas - su "<<a<<" irasu)? Iveskite t/n: "<<endl;
+      ProgramosTesinys = AtsakymoIvedimas();
+      if (ProgramosTesinys=="n")
+      {
+        cout<<"Programos darbas baigtas."<<endl;
+        break;
+      }
+      else
+      {
+        blogieciai.clear();
+        gerieciai.clear();
+      }
+    }
   }
 }
