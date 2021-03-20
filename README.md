@@ -49,7 +49,21 @@ Programos darbas baigtas.
 
 ### Testo rezultatai
 
-Žemiau pateikiami tokio atlikto testo rezultatai (pateikiamas jų 5 bandymų vidurkis).
+Žemiau pateikiami tokio atlikto testo rezultatai (pateikiamas jų 3 bandymų vidurkis).
+
+| Programos etapas      | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
+| :-------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
+| Failo generavimas     | 0.00513       | 0.05209      | 0.87965       | 8.99444        | 88.1974         |
+| Nuskaitymas iš failo  | 0.00239       | 0.02735      | 0.60435       | 5.23691        | 55.6124         |
+| Studentų rūšiavimas   | 0.00027       | 0.00238      | 0.02908       | 0.19607        | 18.9789         |
+| "Geriečių" išvedimas  | 0.00080       | 0.00657      | 0.18500       | 1.74966        | 19.1031         |
+| "Blogiečių" išvedimas | 0.00075       | 0.00554      | 0.16379       | 1.59890        | 17.6413         |
+| **Galutinis laikas**  | 0.00939       | 0.09393      | 1.86187       | 17.7759        | 199.533         |
+
+*Pora pastabų.* 
+* Testai atlikti su -O2 optimizavimo flag'u.
+* Nuskaitymas iš failo šiuo atveju kartu reiškia ir duomenų apdorojimą, kadangi nuskaitymo funkcija iš karto apdoroja kiekvieno sutdento duomenis (joje atliekami ir egzamino balo skaičiavimai). 
+* Surūšiuojant studentus į dvi grupes jie perkeliami į du skirtingus vektorius, o originalus vektorius (t.y. tas kuriame duomenys buvo saugomi iš pradžių) panaikinamas.
 
 ## Programos veikimas (kai pasirinkta neatlikti testo)
 
