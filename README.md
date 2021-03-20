@@ -7,14 +7,69 @@
 * [v0.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.1): pirmoji programos versija, kurioje nuskaitomi studentų duomenys bei išvedamas jų galutinis balas. Šiam skaičiavimui gali būti pasitelkta mediana arba vidurkis. Pažymių įvedimo metu programa veikia net ir nežinant pažymių skaičiaus, jų įvedimą galima sustabdyti įvedant -1. Pažymiai taip pat gali būti generuojami atsitiktinai. Be to, yra dvi šios programos versijos, kurios skiriasi duomenų saugojimu - vienoje duomenys saugojami masyvuose, kitoje - vektoriuose.
 * [v0.2](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.2.1): antroji programos versija, kurioje galima pasirinkti, ar norima nuskaityti duomenis iš failo (tuomet jie bus išvedami į failą "rez.txt". Studentų duomenys yra surūšiuojami pagal jų vardus (jei jie vienodi, tada pagal pavardę).
 * [v0.3](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.3.1): trečioji programos versija, kurioje funkcijos ir struktūros perkeltos į atitinkamus .h arba .cpp failus. Taip pat panaudotas išimčių valdymas (su try/catch, std::vector.at()).
+* [v0.4](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.4): ketvirtoji programos versija, kurioje studentai rūšiuojami į dvi grupes (geriečius ir blogiečius) pagal jų balus. Taip pat nuo šios versijos galima atlikti programos veikimo spartos testą (t.y. sugeneruojamas 10^n (n ∈ [3,7]) įrašų failas su studentais ir jų pažymiais; tuomet tie duomenys nuskaitomi ir apdorojami. Toliau seka studentų rūšiavimas į dvi minėtas grupes. Galiausiai abi šios grupės išvedamos į atitinkamus failus.).
 
 ## Diegimas
 
 Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais). Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
 
-## Programos veikimas
+## Programos spartos veikimo testas
 
-Paleidus programą vartotojo klausiama, ar jis norėtų duomenis nuskaityti iš failo "kursiokai.txt": 
+Paleidus programą vartotojo klausiama, ar jis norėtų atlikti programos veikimo spartos testą:
+```shell
+Ar norite atlikti programos veikimo spartos testa? Iveskite t/n:
+t
+```
+Jei vartotojas pasirinktų atlikti šį testą, būtų pradėtas testavimas su 1000 studentų failo generavimu, nuskaitymu, apdorojimu bei dviejų studentų grupių išvedimu.
+Vartotojas galės pasirinkti ar jis nori tęsti darbą su 10 kartų didesniu failu (max dydis - 10000000), ar baigti programos darbą.
+
+Štai kaip atrodytų pavyzdinis tokio testo variantas, kai vartotojas pasirenka testuoti programos spartą tik su 1000 įrašų:
+```shell
+Ar norite atlikti programos veikimo spartos testa? Iveskite t/n:
+t
+
+Programos veikimo spartos testas su 1000 studentu pradetas.
+
+Sugeneruotas 1000 dydzio failas.
+1000 studentu failo generavimas uztruko 0.00744258 s.
+Duomenys nuskaityti.
+Duomenu (1000 studentu) nuskaitymas is failo uztruko 0.00431587 s.
+1000 studentu rusiavimas (kartu su pirmojo vektoriaus panaikinimu) uztruko 0.000255042 s.
+Duomenys isvesti i faila 'Atsakymai/rez_gerieciai1000.txt'.
+1000 studentu (gerieciu) isvedimas i faila 'Atsakymai/rez_gerieciai1000.txt' uztruko 0.000867968 s.
+Duomenys isvesti i faila 'Atsakymai/rez_blogieciai1000.txt'.
+1000 studentu (blogieciu) isvedimas i faila 'Atsakymai/rez_blogieciai1000.txt' uztruko 0.000743896 s.
+
+1000 irasu testas uztruko 0.0137102 s.
+
+Ar norite toliau testuoti (kitas testas - su 10000 irasu)? Iveskite t/n: 
+n
+Programos darbas baigtas.
+```
+
+### Testo rezultatai
+
+Žemiau pateikiami tokio atlikto testo rezultatai (pateikiamas jų 3 bandymų vidurkis).
+
+| Programos etapas      | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
+| :-------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
+| Failo generavimas     | 0.00513       | 0.05209      | 0.87965       | 8.99444        | 88.1974         |
+| Nuskaitymas iš failo  | 0.00239       | 0.02735      | 0.60435       | 5.23691        | 55.6124         |
+| Studentų rūšiavimas   | 0.00027       | 0.00238      | 0.02908       | 0.19607        | 18.9789         |
+| "Geriečių" išvedimas  | 0.00080       | 0.00657      | 0.18500       | 1.74966        | 19.1031         |
+| "Blogiečių" išvedimas | 0.00075       | 0.00554      | 0.16379       | 1.59890        | 17.6413         |
+| **Galutinis laikas**  | 0.00939       | 0.09393      | 1.86187       | 17.7759        | 199.533         |
+
+*Pora pastabų.* 
+* Testai atlikti su -O2 optimizavimo flag'u.
+* Nuskaitymas iš failo šiuo atveju kartu reiškia ir duomenų apdorojimą, kadangi nuskaitymo funkcija iš karto apdoroja kiekvieno sutdento duomenis (joje atliekami ir egzamino balo skaičiavimai). 
+* Surūšiuojant studentus į dvi grupes jie perkeliami į du skirtingus vektorius, o originalus vektorius (t.y. tas kuriame duomenys buvo saugomi iš pradžių) panaikinamas.
+
+## Programos veikimas (kai pasirinkta neatlikti testo)
+
+Jeigu vartotojas pasirinktų neatlikti testo, programos darbas tęstųsi taip: 
+
+Vartotojo būtų klausiama, ar jis norėtų duomenis nuskaityti iš failo "kursiokai.txt": 
 ```shell
 Ar noretumete studentu duomenis nuskaityti is failo 'kursiokai.txt'? Iveskite t/n:
 n
@@ -43,7 +98,7 @@ t
 ```
 Galiausiai vartotojas gali pasirinkti ar dar bus daugiau studentų. Jei įves raidę t, tuomet procesas bus kartojamas, o jei n, tai bus tiesiog išvesti jau turimų studentų duomenys kartu su jų galutiniais balais.
 
-Taigi, pavyzdinis šios programos veikimo variantas galėtų atrodyti taip:
+Taigi, pavyzdinis šios programos veikimo variantas (be programos spartos veikimo testo ir duomenų nuskaitymo iš failo) galėtų atrodyti taip:
 
 ```shell
 Iveskite studento varda: 
