@@ -1,13 +1,23 @@
 #include "headeriai.h"
 #include "struktura.h"
+#include "laikas.h"
 
 int main() {
+
+  cout<<"Ar norite atlikti programos veikimo spartos testa? Iveskite t/n:"<<endl;
+  string testavimas = AtsakymoIvedimas();
+  if (testavimas == "t")
+  {
+    ProgramosSparta();
+    exit(1);
+  }
+
   //vektoriuje bus saugomi studentai
   vector <Studentas>studentai;
   //rezervuojam vektoriui vietos spartesniam darbui
   studentai.reserve(1024);
 
-  string DuomFailas = "kursiokai.txt";
+  string DuomFailas = "kursiokai100000.txt";
   bool ArReikiaIvesti = true;
 
     if (ArEgzistuoja(DuomFailas))
@@ -43,14 +53,11 @@ int main() {
     
         if (ArGeneruoti == "t")
         {
-          cout<<"Egzamino pazymys: ";
-          s.egzaminas = GeneruokAtsitiktiniSkaiciu(0,10);
-          cout<<endl<<"Pazymiu skaicius: ";
-          s.pazymiuSk = GeneruokAtsitiktiniSkaiciu(0,40);
-          cout<<endl<<"Pazymiai: ";
+          GeneruokPazymius(s);
+          cout<<"Egzamino pazymys: "<<s.egzaminas<<endl<<"Pazymiu skaicius: "<<s.pazymiuSk<<endl<<"Pazymiai: ";
           for (int i = 0; i<s.pazymiuSk; i++)
           {
-            s.pazymiai.push_back(GeneruokAtsitiktiniSkaiciu(0,10));
+            cout<<s.pazymiai[i]<<endl;
           }
           cout<<endl;
         }
@@ -113,7 +120,7 @@ int main() {
 
     //Isvedimas kai duomenys ivedami ranka/nuskaitomi is failo
     if (ArReikiaIvesti) IprastinisDuomIsvedimas(studentai);
-    else DuomenuIsvedimasFaile (studentai);
+    else DuomenuIsvedimasFaile (studentai, "rez.txt");
 
     return 0;
   }
