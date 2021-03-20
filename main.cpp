@@ -17,7 +17,7 @@ int main() {
   //rezervuojam vektoriui vietos spartesniam darbui
   studentai.reserve(1024);
 
-  string DuomFailas = "kursiokai100000.txt";
+  string DuomFailas = "kursiokai.txt"; //galima pakeisti jei reikia
   bool ArReikiaIvesti = true;
 
     if (ArEgzistuoja(DuomFailas))
