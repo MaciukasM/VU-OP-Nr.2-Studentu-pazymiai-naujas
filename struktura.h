@@ -12,6 +12,7 @@ struct Studentas
   int egzaminas; //egzamino rezultatas
   double galutinis;
   double galutinisMed;
+  bool operator < (const Studentas &kitas) { return this->galutinis<kitas.galutinis;}
 };
 
 #endif
