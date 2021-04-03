@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <fstream>
 #include <exception>
+#include <list>
+#include <deque>
 
 using std::cin;
 using std::cout;
@@ -24,6 +26,9 @@ using std::ifstream;
 using std::istringstream;
 using std::ostringstream;
 using std::to_string;
+using std::deque;
+using std::list;
+using std::find_if;
 
 //atsitiktiniams skaiciams
 using std::mt19937;
@@ -33,6 +38,9 @@ typedef std::uniform_int_distribution<int> intDistribution;
 struct Studentas;
 
 //funkcijos
+template <class kont>
+void KontRusiavimas(kont &studentai);
+
 void NeteisingasIvedimas();
 bool ArVienSkaiciai(const string s);
 bool ArEgzistuoja (string DuomFailas);
@@ -42,11 +50,24 @@ double RaskVidurki (vector<int> pazymiai, int pazymiuSk);
 double RaskMediana (vector<int> pazymiai, int pazymiuSk);
 double GalutinisBalas(double ndRez, int egzaminas);
 void GeneruokPazymius(Studentas &s);
-void NuskaitykDuomenis (string DuomFailas, vector <Studentas>&studentai, bool &ArReikiaIvesti);
+
+bool Lygink_5(Studentas &s1);
+
+template <class kont>
+void NuskaitykDuomenis (string DuomFailas, kont &studentai, bool &ArReikiaIvesti);
+
 bool PagalVardus(Studentas s1, Studentas s2);
-void DuomenuIsvedimasFaile (vector <Studentas>studentai, string failas);
-void IprastinisDuomIsvedimas (vector <Studentas>studentai);
+
+template <class kont>
+void DuomenuIsvedimasFaile (kont studentai, string failas);
+
+template <class kont>
+void IprastinisDuomIsvedimas (kont studentai);
 void GeneruokFaila(int dydis);
-void ProgramosSparta();
+
+template <class kont>
+void ProgramosSparta(kont studentai, string konteineris);
+
+void PasirinktasTestas(int n);
 
 #endif
