@@ -80,6 +80,7 @@ Testavimas atliktas su:
 * CPU - Intel Core i5-4670 @3.40GHz
 * RAM - 8 GB (1333 MHz)
 * SSD - ADATA SP900 (120 GB)
+
 Žemiau pateikiami tokio atlikto testo rezultatai.
 
 #### Vector
