@@ -2,6 +2,22 @@
 #include "struktura.h"
 #include "laikas.h"
 
+//konteineriu rusiavimui
+template <class kont>
+void KontRusiavimas(kont &studentai)
+{
+  sort(studentai.begin(), studentai.end());
+}
+
+template <>
+void KontRusiavimas(list<Studentas> &studentai)
+{
+  studentai.sort();
+}
+
+template void KontRusiavimas(vector<Studentas> &studentai);
+template void KontRusiavimas(deque<Studentas> &studentai);
+
 //funkcija simboliu isvalymui, kai irasytas netinkamas simbolis
 void NeteisingasIvedimas()
 {
@@ -83,7 +99,7 @@ double RaskMediana (vector<int> pazymiai, int pazymiuSk)
   double mediana=0;
 
   //rusiavimas
-  std::sort(pazymiai.begin(),pazymiai.end());
+  KontRusiavimas(pazymiai);
 
   if (pazymiuSk!=0)
   {
@@ -118,8 +134,14 @@ void GeneruokPazymius(Studentas &s) //pradzia/pabaiga - intervalo reziai
   }
 }
 
+bool Lygink_5(Studentas &s1)
+{
+  return s1.galutinis == 5;
+}
+
 //funkcija duomenu nuskaitymui is failo
-void NuskaitykDuomenis(string DuomFailas, vector <Studentas>&studentai, bool &ArReikiaIvesti)
+template <class kont>
+void NuskaitykDuomenis(string DuomFailas, kont &studentai, bool &ArReikiaIvesti)
 {
   ifstream failas(DuomFailas);
   if (failas.is_open())
@@ -172,6 +194,9 @@ void NuskaitykDuomenis(string DuomFailas, vector <Studentas>&studentai, bool &Ar
   }
   else throw std::runtime_error("Nepavyko atidaryti failo");
 }
+template void NuskaitykDuomenis(string DuomFailas, vector <Studentas> &studentai, bool &ArReikiaIvesti);
+template void NuskaitykDuomenis(string DuomFailas, list <Studentas> &studentai, bool &ArReikiaIvesti);
+template void NuskaitykDuomenis(string DuomFailas, deque <Studentas> &studentai, bool &ArReikiaIvesti);
 
 //funkcija rusiavimui pagal vardus (jei vardai sutampa, tai pagal pavardes)
 bool PagalVardus(Studentas s1, Studentas s2)
@@ -182,34 +207,46 @@ bool PagalVardus(Studentas s1, Studentas s2)
 }
 
 //funkcija duomenu isvedimui i faila
-void DuomenuIsvedimasFaile (vector <Studentas>studentai, string failas)
+template <class kont>
+void DuomenuIsvedimasFaile (kont studentai, string failas)
 {
   ostringstream Isvedimas;
   Isvedimas<<"Vardas          Pavarde            Galutinis (Vid.)    Galutinis (Med.)\n";
   Isvedimas<<"-----------------------------------------------------------------------\n";
-  for (auto s : studentai)
+  typename kont::iterator it = studentai.begin();
+  for (int i = 0; i<studentai.size();i++)
   {
-    Isvedimas<<left<<setw(16)<<s.vardas<<setw(19)<<s.pavarde<<setw(20)<<setprecision(3)  <<s.galutinis<<setprecision(3)<<s.galutinisMed<<endl;
+    Isvedimas<<left<<setw(16)<<(*it).vardas<<setw(19)<<(*it).pavarde<<setw(20)<<setprecision(3)  <<(*it).galutinis<<setprecision(3)<<(*it).galutinisMed<<endl;
+    it++;
   }
   std::ofstream Rezultatas(failas);
   Rezultatas<<Isvedimas.str();
   Rezultatas.close();
   cout<<"Duomenys isvesti i faila '"<<failas<<"'."<<endl;
 }
+template void DuomenuIsvedimasFaile(vector <Studentas>studentai, string failas);
+template void DuomenuIsvedimasFaile(list <Studentas>studentai, string failas);
+template void DuomenuIsvedimasFaile(deque <Studentas>studentai, string failas);
 
 //funkcija duomenu isvedimui i ekrana
-void IprastinisDuomIsvedimas (vector <Studentas>studentai)
+template <class kont>
+void IprastinisDuomIsvedimas (kont studentai)
 {
-  std::sort(studentai.begin(),studentai.end(), PagalVardus);
+  KontRusiavimas(studentai);
   cout<<left<<setw(16)<<"Vardas"<<setw(19)<<"Pavarde"<<setw(20)<<"Galutinis (Vid.)"<<"Galutinis (Med.)"<<endl;
   
   cout<<"-------------------------------------------------------------------------"<<endl;
 
-  for (auto s : studentai)
+  typename kont::iterator it = studentai.begin();
+  for (int i = 0; i<studentai.size();i++)
   {
-    cout<<left<<setw(16)<<s.vardas<<setw(19)<<s.pavarde<<setw(20)<<setprecision(3)  <<s.galutinis<<setprecision(3)<<s.galutinisMed<<endl;
+    cout<<left<<setw(16)<<(*it).vardas<<setw(19)<<(*it).pavarde<<setw(20)<<setprecision(3)  <<(*it).galutinis<<setprecision(3)<<(*it).galutinisMed<<endl;
+    it++;
   }
 }
+template void IprastinisDuomIsvedimas (vector<Studentas> studentai);
+template void IprastinisDuomIsvedimas (list<Studentas> studentai);
+template void IprastinisDuomIsvedimas (deque<Studentas> studentai);
 
 //failu generavimo funkcija
 void GeneruokFaila(int dydis)
@@ -242,10 +279,9 @@ void GeneruokFaila(int dydis)
   cout<<"Sugeneruotas "<<dydis<<" dydzio failas."<<endl;
 }
 
-//programos benchmark (programos spartos nustatymo) funkcija
-void ProgramosSparta()
+template <class kont>
+void ProgramosSparta(kont studentai, string konteineris)
 {
-  vector <Studentas>studentai;
   double visasLaikas; //galutiniam testo laikui pateikti
   bool temp=false; //kintamasis kad veiktu funkcija
   string rezFailas; //isvedimui gerieciu/blogieciu
@@ -257,17 +293,20 @@ void ProgramosSparta()
     cout<<"\nProgramos veikimo spartos testas su "<<i<<" studentu pradetas.\n"<<endl;
 
     laikas.reset();
-    studentai.reserve(i);
     
     //failo generavimas
-    GeneruokFaila(i);
-    cout<<i<<" studentu failo generavimas uztruko "<<laikas.elapsed()<<" s."<<endl;
-    visasLaikas+=laikas.elapsed();
+    string DuomFailas="Sugeneruotas"+to_string(i)+".txt";
+    ifstream f(DuomFailas);
+    if (!f.good())
+    {
+      GeneruokFaila(i);
+      cout<<i<<" studentu failo generavimas uztruko "<<laikas.elapsed()<<" s."<<endl;
+      visasLaikas+=laikas.elapsed();
+    }
     laikas.reset();
     //failo generavimas
 
     //failo nuskaitymas
-    string DuomFailas="Sugeneruotas"+to_string(i)+".txt";
     NuskaitykDuomenis(DuomFailas, studentai, temp);
     cout<<"Duomenu ("<<i<<" studentu) nuskaitymas is failo uztruko "<<laikas.elapsed()<<" s."<<endl;
     visasLaikas+=laikas.elapsed();
@@ -275,18 +314,12 @@ void ProgramosSparta()
     //failo nuskaitymas
 
     //studentu rusiavimas i dvi grupes
-    vector <Studentas>gerieciai;
-    vector <Studentas>blogieciai;
-    gerieciai.reserve(i);
-    blogieciai.reserve(i);
-    for (int j = 0; j<i; j++)
-    {
-      if(studentai[j].galutinis < 5)
-      {
-        blogieciai.push_back(studentai[j]);
-      }
-      else gerieciai.push_back(studentai[j]);
-    }
+    KontRusiavimas(studentai);
+    auto it = find_if(studentai.begin(),studentai.end(),Lygink_5); 
+    kont blogieciai;
+    kont gerieciai;
+    blogieciai.assign(studentai.begin(),it);
+    gerieciai.assign(it,studentai.end());
     studentai.clear();
     cout<<i<<" studentu rusiavimas (kartu su pirmojo vektoriaus panaikinimu) uztruko "<<laikas.elapsed()<<" s."<<endl;
     visasLaikas+=laikas.elapsed();
@@ -294,7 +327,7 @@ void ProgramosSparta()
     //studentu rusiavimas i dvi grupes
 
     //"gerieciu" isvedimas i faila
-    rezFailas = "Atsakymai/rez_gerieciai"+to_string(i)+".txt";
+    rezFailas = "Atsakymai/rez_gerieciai"+to_string(i)+konteineris+".txt";
     DuomenuIsvedimasFaile(gerieciai, rezFailas);
     cout<<i<<" studentu (gerieciu) isvedimas i faila '"<<rezFailas<<"' uztruko "<<laikas.elapsed()<<" s."<<endl;
     visasLaikas+=laikas.elapsed();
@@ -302,7 +335,7 @@ void ProgramosSparta()
     //"gerieciu" isvedimas i faila
 
     //"blogieciu" isvedimas i faila
-    rezFailas = "Atsakymai/rez_blogieciai"+to_string(i)+".txt";
+    rezFailas = "Atsakymai/rez_blogieciai"+to_string(i)+konteineris+".txt";
     DuomenuIsvedimasFaile(blogieciai, rezFailas);
     cout<<i<<" studentu (blogieciu) isvedimas i faila '"<<rezFailas<<"' uztruko "<<laikas.elapsed()<<" s."<<endl<<endl;
     visasLaikas+=laikas.elapsed();
@@ -329,4 +362,17 @@ void ProgramosSparta()
       }
     }
   }
+}
+
+template void ProgramosSparta(vector<Studentas> studentai, string konteineris);
+template void ProgramosSparta(list<Studentas> studentai, string konteineris);
+template void ProgramosSparta(deque<Studentas> studentai, string konteineris);
+
+//funkcija, kuri iskviecia atitinkamas benchmarkinimo funkcijas
+void PasirinktasTestas(int n)
+{
+  if (n == 0) ProgramosSparta(vector <Studentas> (), "vector");
+  else if (n == 1) ProgramosSparta(list <Studentas> (), "list");
+  else if (n == 2) ProgramosSparta(deque <Studentas> (), "deque");
+  else cout<<"Atsaukiamas programos testavimas."<<endl;
 }
