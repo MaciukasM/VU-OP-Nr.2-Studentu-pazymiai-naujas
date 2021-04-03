@@ -8,12 +8,13 @@
 * [v0.2](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.2.1): antroji programos versija, kurioje galima pasirinkti, ar norima nuskaityti duomenis iš failo (tuomet jie bus išvedami į failą "rez.txt". Studentų duomenys yra surūšiuojami pagal jų vardus (jei jie vienodi, tada pagal pavardę).
 * [v0.3](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.3.1): trečioji programos versija, kurioje funkcijos ir struktūros perkeltos į atitinkamus .h arba .cpp failus. Taip pat panaudotas išimčių valdymas (su try/catch, std::vector.at()).
 * [v0.4](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.4): ketvirtoji programos versija, kurioje studentai rūšiuojami į dvi grupes (geriečius ir blogiečius) pagal jų balus. Taip pat nuo šios versijos galima atlikti programos veikimo spartos testą (t.y. sugeneruojamas 10^n (n ∈ [3,7]) įrašų failas su studentais ir jų pažymiais; tuomet tie duomenys nuskaitomi ir apdorojami. Toliau seka studentų rūšiavimas į dvi minėtas grupes. Galiausiai abi šios grupės išvedamos į atitinkamus failus.).
+* [v0.5](): penktoji programos versija, kurioje galima atlikti bandymus su įvairiais konteinerių tipais (t.y. atlikti ketvirtoje versijoje implementuotą programos veikimo spartos testą su konteineriais std::list bei std::deque (prieš tai testas buvo atliekamas su std::vector tipo konteineriu). Testo rezultatus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis))
 
 ## Diegimas
 
 Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais). Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
 
-## Programos spartos veikimo testas
+## <a name="greitis"></a>Programos spartos veikimo testas
 
 Paleidus programą vartotojo klausiama, ar jis norėtų atlikti programos veikimo spartos testą:
 ```shell
