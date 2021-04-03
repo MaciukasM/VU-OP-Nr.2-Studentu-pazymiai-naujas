@@ -12,7 +12,11 @@
 
 ## Diegimas
 
-Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais). Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
+Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais):
+```shell
+g++ -o program main.cpp funkcijos.cpp -O2
+```
+Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
 
 ## <a name="greitis"></a>Programos spartos veikimo testas
 
