@@ -32,7 +32,7 @@ Su kokiu konteineriu norite atlikti si testa?
 Iveskite sveikaji skaiciu nuo 0 iki 3:
 1
 ```
-Pasirinkus norimą konteinerio tipą, būtų pradėtas testavimas su 1000 studentų failo generavimu (jei failas nesugeneruotas), nuskaitymu, apdorojimu bei dviejų studentų grupių išvedimu.
+Pasirinkus norimą konteinerio tipą, būtų pradėtas testavimas su 1000 studentų failo generavimu (jei failas nesugeneruotas iš anksto), nuskaitymu, apdorojimu bei dviejų studentų grupių išvedimu.
 Vartotojas galės pasirinkti ar jis nori tęsti darbą su 10 kartų didesniu failu (max dydis - 10000000), ar baigti programos darbą.
 
 Štai kaip atrodytų pavyzdinis tokio testo variantas, kai vartotojas pasirenka testuoti programos spartą tik su 1000 įrašų:
