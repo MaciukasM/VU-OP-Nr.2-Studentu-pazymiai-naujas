@@ -8,8 +8,12 @@ int main() {
   string testavimas = AtsakymoIvedimas();
   if (testavimas == "t")
   {
-    ProgramosSparta();
-    exit(1);
+    cout<<"Su kokiu konteineriu norite atlikti si testa?"<<endl;
+    cout<<"\n0 - vektorius\n1 - list'as\n2 - deque\n3 - atsaukti testa"<<endl;
+    cout<<"Iveskite sveikaji skaiciu nuo 0 iki 3:"<<endl;
+    int pasirinkimas = IvedimasIntervale(0, 3, false);
+    PasirinktasTestas(pasirinkimas);
+    if (pasirinkimas != 3) exit(1);
   }
 
   //vektoriuje bus saugomi studentai
@@ -17,7 +21,7 @@ int main() {
   //rezervuojam vektoriui vietos spartesniam darbui
   studentai.reserve(1024);
 
-  string DuomFailas = "kursiokai.txt"; //galima pakeisti jei reikia
+  string DuomFailas = "kursiokai100000.txt";
   bool ArReikiaIvesti = true;
 
     if (ArEgzistuoja(DuomFailas))
