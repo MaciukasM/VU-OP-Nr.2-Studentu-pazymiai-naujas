@@ -21,13 +21,32 @@ Paleidus programą vartotojo klausiama, ar jis norėtų atlikti programos veikim
 Ar norite atlikti programos veikimo spartos testa? Iveskite t/n:
 t
 ```
-Jei vartotojas pasirinktų atlikti šį testą, būtų pradėtas testavimas su 1000 studentų failo generavimu, nuskaitymu, apdorojimu bei dviejų studentų grupių išvedimu.
+Jei vartotojas pasirinktų atlikti šį testą, jo bus klausiama, kurį konteinerio tipą jis norėtų naudoti testavimui:
+```shell
+Su kokiu konteineriu norite atlikti si testa?
+
+0 - vektorius
+1 - list'as
+2 - deque
+3 - atsaukti testa
+Iveskite sveikaji skaiciu nuo 0 iki 3:
+1
+```
+Pasirinkus norimą konteinerio tipą, būtų pradėtas testavimas su 1000 studentų failo generavimu, nuskaitymu, apdorojimu bei dviejų studentų grupių išvedimu.
 Vartotojas galės pasirinkti ar jis nori tęsti darbą su 10 kartų didesniu failu (max dydis - 10000000), ar baigti programos darbą.
 
 Štai kaip atrodytų pavyzdinis tokio testo variantas, kai vartotojas pasirenka testuoti programos spartą tik su 1000 įrašų:
 ```shell
 Ar norite atlikti programos veikimo spartos testa? Iveskite t/n:
 t
+Su kokiu konteineriu norite atlikti si testa?
+
+0 - vektorius
+1 - list'as
+2 - deque
+3 - atsaukti testa
+Iveskite sveikaji skaiciu nuo 0 iki 3:
+1
 
 Programos veikimo spartos testas su 1000 studentu pradetas.
 
