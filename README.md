@@ -16,7 +16,10 @@ Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite
 ```shell
 g++ -o program main.cpp funkcijos.cpp -O2
 ```
-Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą.
+Svarbu, kad joje būtų palaikomas C++11 standartas. Galiausiai lieka tik paleisti .exe failą:
+```shell
+.\program.exe
+```
 
 ## <a name="greitis"></a>Programos spartos veikimo testas
 
