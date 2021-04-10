@@ -26,7 +26,7 @@ Svarbu, kad aplinkoje būtų palaikomas C++11 standartas. Galiausiai lieka tik p
 .\program.exe
 ```
 
-## <a name="greitis"></a>Programos spartos veikimo testas
+## Programos spartos veikimo testas
 
 Paleidus programą vartotojo klausiama, ar jis norėtų atlikti programos veikimo spartos testą:
 ```shell
@@ -93,14 +93,44 @@ n
 Programos darbas baigtas.
 ```
 
-### Testo rezultatai
+### <a name="greitis"></a>Testo rezultatai
 
 Testavimas atliktas su:
 * CPU - Intel Core i5-4670 @3.40GHz
 * RAM - 8 GB (1333 MHz)
 * SSD - ADATA SP900 (120 GB)
 
+Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas pirmasis variantas, t.y. kai studentai skirstomi į du naujus konteinerius**.
 Žemiau pateikiami tokio atlikto testo rezultatai.
+
+#### Vector
+
+| Programos etapas        | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
+| :---------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
+| Nuskaitymas iš failo    | 0.00402       | 0.04097      | 0.33781       | 3.31411        | 33.4141         |
+| Studentų rūšiavimas     | 0.00097       | 0.00400      | 0.04697       | 0.46772        | 5.87865         |
+| Abiejų grupių išvedimas | 0.00599       | 0.01997      | 0.15591       | 1.48115        | 14.9664         |
+| **Galutinis laikas**    | 0.01299       | 0.06595      | 0.54269       | 5.26499        | 54.2612         |
+
+#### List
+
+| Programos etapas        | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
+| :---------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
+| Nuskaitymas iš failo    | 0.00499       | 0.03997      | 0.34380       | 3.34908        | 33.2010         |
+| Studentų rūšiavimas     | 0.00100       | 0.00500      | 0.06497       | 0.63363        | 8.12736         |
+| Abiejų grupių išvedimas | 0.00500       | 0.02298      | 0.18089       | 1.67105        | 16.8193         |
+| **Galutinis laikas**    | 0.01298       | 0.07197      | 0.58967       | 5.65576        | 58.1497         |
+
+#### Deque
+
+| Programos etapas        | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
+| :---------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
+| Nuskaitymas iš failo    | 0.00699       | 0.03899      | 0.33880       | 3.31111        | 32.9282         |
+| Studentų rūšiavimas     | 0.00005       | 0.00645      | 0.06995       | 0.71843        | 8.93790         |
+| Abiejų grupių išvedimas | 0.00299       | 0.01999      | 0.17090       | 1.57161        | 16.0015         |
+| **Galutinis laikas**    | 0.01056       | 0.06788      | 0.58166       | 5.60416        | 57.8706         |
+
+**2)** Žemiau pavaizduoti testo rezultatai, kai tik blogiečiai perkeliami iš studentų konteinerio, geriečiai paliekami.
 
 #### Vector
 
@@ -131,8 +161,7 @@ Testavimas atliktas su:
 
 *Pora pastabų.* 
 * Testai atlikti su -O2 optimizavimo flag'u.
-* Nuskaitymas iš failo šiuo atveju kartu reiškia ir duomenų apdorojimą, kadangi nuskaitymo funkcija iš karto apdoroja kiekvieno sutdento duomenis (joje atliekami ir egzamino balo skaičiavimai). 
-* Surūšiuojant studentus į dvi grupes jie perkeliami į du skirtingus vektorius, o originalus vektorius (t.y. tas kuriame duomenys buvo saugomi iš pradžių) panaikinamas.
+* Nuskaitymas iš failo šiuo atveju kartu reiškia ir duomenų apdorojimą, kadangi nuskaitymo funkcija iš karto apdoroja kiekvieno studento duomenis (joje atliekami ir egzamino balo skaičiavimai). 
 
 ## Programos veikimas (kai pasirinkta neatlikti testo)
 
