@@ -1,6 +1,7 @@
 #include "headeriai.h"
 #include "struktura.h"
 #include "laikas.h"
+#include "generavimas.h"
 
 //konteineriu rusiavimui
 template <class kont>
@@ -120,17 +121,25 @@ double GalutinisBalas(double ndRez, int egzaminas)
   return galutinis;
 }
 
+//generavimo klases konstruktorius
+AtsitiktinisSk::AtsitiktinisSk() : mt{rd()} {}
+
+//skaičiaus generavimas
+int AtsitiktinisSk::Skaicius(int pradzia, int pabaiga) {
+    std::uniform_int_distribution<int> uid(pradzia, pabaiga);
+    return uid(mt);
+}
+
 //funkcija atsitiktiniams pazymiams (ir ju skaiciui) generuoti
 void GeneruokPazymius(Studentas &s) //pradzia/pabaiga - intervalo reziai
 {
-  mt19937 mt(static_cast<int>(Laikas::now().time_since_epoch().count()));
-  intDistribution Paskirstyk(0, 10);
+  AtsitiktinisSk generuok;
 
-  s.egzaminas = Paskirstyk(mt);
-  s.pazymiuSk = Paskirstyk(mt)*2;
+  s.egzaminas = generuok.Skaicius(0,10);
+  s.pazymiuSk = generuok.Skaicius(0,20);
   for (int i = 0; i < s.pazymiuSk; i++)
   {
-    s.pazymiai.push_back(Paskirstyk(mt));
+    s.pazymiai.push_back(generuok.Skaicius(0,10));
   }
 }
 
@@ -224,9 +233,6 @@ void DuomenuIsvedimasFaile (kont studentai, string failas)
   Rezultatas.close();
   cout<<"Duomenys isvesti i faila '"<<failas<<"'."<<endl;
 }
-template void DuomenuIsvedimasFaile(vector <Studentas>studentai, string failas);
-template void DuomenuIsvedimasFaile(list <Studentas>studentai, string failas);
-template void DuomenuIsvedimasFaile(deque <Studentas>studentai, string failas);
 
 //funkcija duomenu isvedimui i ekrana
 template <class kont>
@@ -244,9 +250,19 @@ void IprastinisDuomIsvedimas (kont studentai)
     it++;
   }
 }
-template void IprastinisDuomIsvedimas (vector<Studentas> studentai);
-template void IprastinisDuomIsvedimas (list<Studentas> studentai);
-template void IprastinisDuomIsvedimas (deque<Studentas> studentai);
+
+template <class kont>
+void DuomIsvedimas(kont studentai, bool ArFailas, string failas)
+{
+  if (studentai.size()!=0)
+  {
+    if (ArFailas) DuomenuIsvedimasFaile(studentai, failas);
+    else IprastinisDuomIsvedimas(studentai);
+  }
+}
+template void DuomIsvedimas(vector<Studentas> studentai, bool ArFailas, string failas);
+template void DuomIsvedimas(list<Studentas> studentai, bool ArFailas, string failas);
+template void DuomIsvedimas(deque<Studentas> studentai, bool ArFailas, string failas);
 
 //failu generavimo funkcija
 void GeneruokFaila(int dydis)
@@ -258,12 +274,12 @@ void GeneruokFaila(int dydis)
   
   for (int i = 1; i <= dydis; i++)
   {
+    s.pazymiai.clear();
     s.vardas = "Vardas"+to_string(i);
     s.pavarde = "Pavarde"+to_string(i);
 
     duomenys<<left<<setw(16)<<s.vardas<<setw(25)<<s.pavarde;
 
-    s.pazymiai.clear();
     GeneruokPazymius(s);
     for (int j = 0; j<s.pazymiuSk;j++)
     {
@@ -282,6 +298,11 @@ void GeneruokFaila(int dydis)
 template <class kont>
 void ProgramosSparta(kont studentai, string konteineris)
 {
+  cout<<"\nKokia strategija norite naudoti rusiavimui?"<<endl;
+  cout<<"0 - Studentai ikeliami i du naujus konteinerius (blogieciai/gerieciai)\n1 - Studentai ikeliami tik i blogieciu konteineri, gerieciai paliekami studentu konteineryje"<<endl;
+  cout<<"Iveskite 0 arba 1:"<<endl;
+  int Rusiavimui = IvedimasIntervale(0,1,false);
+
   double visasLaikas; //galutiniam testo laikui pateikti
   bool temp=false; //kintamasis kad veiktu funkcija
   string rezFailas; //isvedimui gerieciu/blogieciu
@@ -316,27 +337,37 @@ void ProgramosSparta(kont studentai, string konteineris)
     //studentu rusiavimas i dvi grupes
     KontRusiavimas(studentai);
     auto it = find_if(studentai.begin(),studentai.end(),Lygink_5); 
+    //studentu rusiavimas i dvi grupes
     kont blogieciai;
     kont gerieciai;
-    blogieciai.assign(studentai.begin(),it);
-    gerieciai.assign(it,studentai.end());
-    studentai.clear();
-    cout<<i<<" studentu rusiavimas (kartu su pirmojo vektoriaus panaikinimu) uztruko "<<laikas.elapsed()<<" s."<<endl;
+    //studentu skaidymas pagal 1-a strategija (i du naujus konteinerius)
+    if (!Rusiavimui)
+    {
+      blogieciai.assign(studentai.begin(),it);
+      gerieciai.assign(it,studentai.end());
+    }
+    else //studentu skaicymas pagal 2-a strategija (perkeliami tik blogieciai)
+    {
+      blogieciai.assign(studentai.begin(),it);
+      studentai.erase(studentai.begin(),it);
+    }
+    cout<<i<<" studentu rusiavimas uztruko "<<laikas.elapsed()<<" s."<<endl;
     visasLaikas+=laikas.elapsed();
     laikas.reset();
-    //studentu rusiavimas i dvi grupes
+    
 
     //"gerieciu" isvedimas i faila
-    rezFailas = "Atsakymai/rez_gerieciai"+to_string(i)+konteineris+".txt";
-    DuomenuIsvedimasFaile(gerieciai, rezFailas);
+    rezFailas = "rez_gerieciai"+to_string(i)+konteineris+".txt";
+    if(Rusiavimui) DuomIsvedimas(studentai, true, rezFailas);
+    else DuomIsvedimas(gerieciai, true, rezFailas);
     cout<<i<<" studentu (gerieciu) isvedimas i faila '"<<rezFailas<<"' uztruko "<<laikas.elapsed()<<" s."<<endl;
     visasLaikas+=laikas.elapsed();
     laikas.reset();
     //"gerieciu" isvedimas i faila
 
     //"blogieciu" isvedimas i faila
-    rezFailas = "Atsakymai/rez_blogieciai"+to_string(i)+konteineris+".txt";
-    DuomenuIsvedimasFaile(blogieciai, rezFailas);
+    rezFailas = "rez_blogieciai"+to_string(i)+konteineris+".txt";
+    DuomIsvedimas(blogieciai, true, rezFailas);
     cout<<i<<" studentu (blogieciu) isvedimas i faila '"<<rezFailas<<"' uztruko "<<laikas.elapsed()<<" s."<<endl<<endl;
     visasLaikas+=laikas.elapsed();
     //"blogieciu" isvedimas i faila
