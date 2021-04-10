@@ -12,6 +12,7 @@
 #include <exception>
 #include <list>
 #include <deque>
+#include <sstream>
 
 using std::cin;
 using std::cout;
@@ -58,11 +59,13 @@ void NuskaitykDuomenis (string DuomFailas, kont &studentai, bool &ArReikiaIvesti
 
 bool PagalVardus(Studentas s1, Studentas s2);
 
-template <class kont>
+/*template <class kont>
 void DuomenuIsvedimasFaile (kont studentai, string failas);
 
 template <class kont>
-void IprastinisDuomIsvedimas (kont studentai);
+void IprastinisDuomIsvedimas (kont studentai);*/
+template <class kont>
+void DuomIsvedimas(kont studentai, bool ArFailas, string failas = "rez.txt");
 void GeneruokFaila(int dydis);
 
 template <class kont>
