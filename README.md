@@ -8,8 +8,8 @@
 * [v0.2](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.2.1): antroji programos versija, kurioje galima pasirinkti, ar norima nuskaityti duomenis iš failo (tuomet jie bus išvedami į failą "rez.txt". Studentų duomenys yra surūšiuojami pagal jų vardus (jei jie vienodi, tada pagal pavardę).
 * [v0.3](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.3.1): trečioji programos versija, kurioje funkcijos ir struktūros perkeltos į atitinkamus .h arba .cpp failus. Taip pat panaudotas išimčių valdymas (su try/catch, std::vector.at()).
 * [v0.4](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.4): ketvirtoji programos versija, kurioje studentai rūšiuojami į dvi grupes (geriečius ir blogiečius) pagal jų balus. Taip pat nuo šios versijos galima atlikti programos veikimo spartos testą (t.y. sugeneruojamas 10^n (n ∈ [3,7]) įrašų failas su studentais ir jų pažymiais; tuomet tie duomenys nuskaitomi ir apdorojami. Toliau seka studentų rūšiavimas į dvi minėtas grupes. Galiausiai abi šios grupės išvedamos į atitinkamus failus.).
-* [v0.5](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.5): penktoji programos versija, kurioje galima atlikti bandymus su įvairiais konteinerių tipais (t.y. atlikti ketvirtoje versijoje implementuotą programos veikimo spartos testą su konteineriais std::list bei std::deque (prieš tai testas buvo atliekamas su std::vector tipo konteineriu). Testo rezultatus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis)).
-* [v1.0](): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis)).
+* [v0.5](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.5): penktoji programos versija, kurioje galima atlikti bandymus su įvairiais konteinerių tipais (t.y. atlikti ketvirtoje versijoje implementuotą programos veikimo spartos testą su konteineriais std::list bei std::deque (prieš tai testas buvo atliekamas su std::vector tipo konteineriu). Testo rezultatus ir komentarus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis)).
+* [v1.0](): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Testo rezultatai (1 variantas)](#greitis1) bei [Testo rezultatai (2 variantas)](#greitis2)).
 
 ## Diegimas
 
@@ -93,7 +93,7 @@ n
 Programos darbas baigtas.
 ```
 
-### <a name="greitis"></a>Testo rezultatai (1 variantas)
+### <a name="greitis1"></a>Testo rezultatai (1 variantas)
 
 Testavimas atliktas su:
 * CPU - Intel Core i5-4670 @3.40GHz
@@ -130,7 +130,7 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 | Abiejų grupių išvedimas | 0.00299       | 0.01999      | 0.17090       | 1.57161        | 16.0015         |
 | **Galutinis laikas**    | 0.01056       | 0.06788      | 0.58166       | 5.60416        | 57.8706         |
 
-### Testo rezultatai (2 variantas)
+### <a name="greitis2"></a>Testo rezultatai (2 variantas)
 Žemiau pavaizduoti testo rezultatai, kai tik blogiečiai perkeliami iš studentų konteinerio, geriečiai paliekami.
 
 #### Vector
