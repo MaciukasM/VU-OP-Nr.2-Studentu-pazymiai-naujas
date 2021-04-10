@@ -93,7 +93,7 @@ n
 Programos darbas baigtas.
 ```
 
-### <a name="greitis"></a>Testo rezultatai
+### <a name="greitis"></a>Testo rezultatai (1 variantas)
 
 Testavimas atliktas su:
 * CPU - Intel Core i5-4670 @3.40GHz
@@ -130,7 +130,8 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 | Abiejų grupių išvedimas | 0.00299       | 0.01999      | 0.17090       | 1.57161        | 16.0015         |
 | **Galutinis laikas**    | 0.01056       | 0.06788      | 0.58166       | 5.60416        | 57.8706         |
 
-**2)** Žemiau pavaizduoti testo rezultatai, kai tik blogiečiai perkeliami iš studentų konteinerio, geriečiai paliekami.
+### Testo rezultatai (2 variantas)
+Žemiau pavaizduoti testo rezultatai, kai tik blogiečiai perkeliami iš studentų konteinerio, geriečiai paliekami.
 
 #### Vector
 
