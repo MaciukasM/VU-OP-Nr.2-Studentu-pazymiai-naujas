@@ -125,10 +125,10 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 
 | Programos etapas        | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
 | :---------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
-| Nuskaitymas iš failo    | 0.00699       | 0.03899      | 0.33880       | 3.31111        | 32.9282         |
-| Studentų rūšiavimas     | 0.00005       | 0.00645      | 0.06995       | 0.71843        | 8.93790         |
-| Abiejų grupių išvedimas | 0.00299       | 0.01999      | 0.17090       | 1.57161        | 16.0015         |
-| **Galutinis laikas**    | 0.01056       | 0.06788      | 0.58166       | 5.60416        | 57.8706         |
+| Nuskaitymas iš failo    | 0.00897       | 0.06096      | 0.51370       | 4.32669        | 42.7790         |
+| Studentų rūšiavimas     | 0.00299       | 0.02399      | 0.20584       | 2.62122        | 31.6244         |
+| Abiejų grupių išvedimas | 0.00981       | 0.03780      | 0.28783       | 2.41950        | 27.1984         |
+| **Galutinis laikas**    | 0.02297       | 0.12393      | 1.00839       | 9.39640        | 101.605         |
 
 ### <a name="greitis2"></a>Testo rezultatai (2 variantas)
 Žemiau pavaizduoti testo rezultatai, kai tik blogiečiai perkeliami iš studentų konteinerio, geriečiai paliekami.
@@ -155,10 +155,10 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 
 | Programos etapas        | 1000 (10^3)   | 10000 (10^4) | 100000 (10^5) | 1000000 (10^6) | 10000000 (10^7) |
 | :---------------------- | :------------ | :----------- | :------------ | :------------- | :-------------- |
-| Nuskaitymas iš failo    | 0.00699       | 0.03899      | 0.33880       | 3.31111        | 32.9282         |
-| Studentų rūšiavimas     | 0.00005       | 0.00645      | 0.06995       | 0.71843        | 8.93790         |
-| Abiejų grupių išvedimas | 0.00299       | 0.01999      | 0.17090       | 1.57161        | 16.0015         |
-| **Galutinis laikas**    | 0.01056       | 0.06788      | 0.58166       | 5.60416        | 57.8706         |
+| Nuskaitymas iš failo    | 0.00799       | 0.05795      | 0.51474       | 4.31153        | 42.7905         |
+| Studentų rūšiavimas     | 0.00199       | 0.01999      | 0.23086       | 2.29339        | 29.6391         |
+| Abiejų grupių išvedimas | 0.00697       | 0.03626      | 0.27864       | 2.34456        | 24.2487         |
+| **Galutinis laikas**    | 0.02000       | 0.11731      | 1.02569       | 8.95246        | 96.6800         |
 
 *Pora pastabų.* 
 * Testai atlikti su -O2 optimizavimo flag'u.
