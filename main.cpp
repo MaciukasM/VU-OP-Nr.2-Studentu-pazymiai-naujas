@@ -123,8 +123,8 @@ int main() {
     }
 
     //Isvedimas kai duomenys ivedami ranka/nuskaitomi is failo
-    if (ArReikiaIvesti) IprastinisDuomIsvedimas(studentai);
-    else DuomenuIsvedimasFaile (studentai, "rez.txt");
+    if (ArReikiaIvesti) DuomIsvedimas(studentai, false);
+    else DuomIsvedimas (studentai, true);
 
     return 0;
   }
