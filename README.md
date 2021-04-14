@@ -9,7 +9,7 @@
 * [v0.3](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.3.1): trečioji programos versija, kurioje funkcijos ir struktūros perkeltos į atitinkamus .h arba .cpp failus. Taip pat panaudotas išimčių valdymas (su try/catch, std::vector.at()).
 * [v0.4](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.4): ketvirtoji programos versija, kurioje studentai rūšiuojami į dvi grupes (geriečius ir blogiečius) pagal jų balus. Taip pat nuo šios versijos galima atlikti programos veikimo spartos testą (t.y. sugeneruojamas 10^n (n ∈ [3,7]) įrašų failas su studentais ir jų pažymiais; tuomet tie duomenys nuskaitomi ir apdorojami. Toliau seka studentų rūšiavimas į dvi minėtas grupes. Galiausiai abi šios grupės išvedamos į atitinkamus failus.).
 * [v0.5](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.5): penktoji programos versija, kurioje galima atlikti bandymus su įvairiais konteinerių tipais (t.y. atlikti ketvirtoje versijoje implementuotą programos veikimo spartos testą su konteineriais std::list bei std::deque (prieš tai testas buvo atliekamas su std::vector tipo konteineriu). Testo rezultatus ir komentarus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis)).
-* [v1.0](): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Testo rezultatai (1 variantas)](#greitis1) bei [Testo rezultatai (2 variantas)](#greitis2)).
+* [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Testo rezultatai (1 variantas)](#greitis1) bei [Testo rezultatai (2 variantas)](#greitis2)).
 
 ## Diegimas
 
@@ -17,7 +17,7 @@ Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite
 ```shell
 g++ -o program main.cpp funkcijos.cpp -O2
 ```
-Nuo versijos [v1.0]() galima naudotis makefile komandomis:
+Nuo versijos [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0) galima naudotis makefile komandomis:
 ```shell
 mingw32-make
 ```
