@@ -95,7 +95,7 @@ Programos darbas baigtas.
 
 ### <a name="greitis1"></a>Testo rezultatai (1 variantas)
 
-Testavimas (abiejais atvejais) atliktas su:
+Testavimas (abiem atvejais) atliktas su:
 * CPU - Intel Core i5-4670 @3.40GHz
 * RAM - 8 GB (1333 MHz)
 * SSD - ADATA SP900 (120 GB)
