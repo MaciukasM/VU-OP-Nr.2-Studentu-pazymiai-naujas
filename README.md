@@ -16,7 +16,7 @@
 
 Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais):
 ```shell
-g++ -o program main.cpp funkcijos.cpp -O2
+g++ -o program main.cpp funkcijos.cpp struktura.cpp -O2
 ```
 Nuo versijos [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0) galima naudotis makefile komandomis:
 ```shell
