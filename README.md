@@ -9,13 +9,14 @@
 * [v0.3](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.3.1): trečioji programos versija, kurioje funkcijos ir struktūros perkeltos į atitinkamus .h arba .cpp failus. Taip pat panaudotas išimčių valdymas (su try/catch, std::vector.at()).
 * [v0.4](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.4): ketvirtoji programos versija, kurioje studentai rūšiuojami į dvi grupes (geriečius ir blogiečius) pagal jų balus. Taip pat nuo šios versijos galima atlikti programos veikimo spartos testą (t.y. sugeneruojamas 10^n (n ∈ [3,7]) įrašų failas su studentais ir jų pažymiais; tuomet tie duomenys nuskaitomi ir apdorojami. Toliau seka studentų rūšiavimas į dvi minėtas grupes. Galiausiai abi šios grupės išvedamos į atitinkamus failus.).
 * [v0.5](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.5): penktoji programos versija, kurioje galima atlikti bandymus su įvairiais konteinerių tipais (t.y. atlikti ketvirtoje versijoje implementuotą programos veikimo spartos testą su konteineriais std::list bei std::deque (prieš tai testas buvo atliekamas su std::vector tipo konteineriu). Testo rezultatus ir komentarus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis)).
-* [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Testo rezultatai (1 variantas)](#greitis1) bei [Testo rezultatai (2 variantas)](#greitis2)).
+* [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Testo rezultatai kopijavimo metodu](#greitis1) bei [Testo rezultatai ištrynimo metodu](#greitis2)).
+* [v1.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai-naujas/releases/tag/v1.1): šioje versijoje programa pertvarkyta taip, kad vietoje struktūros būtų naudojama klasė. Eksperimentinės analizės rezultatus (t.y. greičio tarp struktūros ir klasės bei skirtingų optimizavimo flag'ų) galima peržiūrėti žemiau (žr. [Klasės/struktūros greičio analizė](#klase) ir [Optimizavimo lygio poveikis programos dydžiui](#flag)).
 
 ## Diegimas
 
 Atsisiųskite norimą versiją iš repozitorijos releas'ų (prireikus iškelkite .cpp ir .h failus iš aplanko su pasirinkta programa, pvz. WinRar). Tuomet sukompiliuokite norimoje programoje ar aplinkoje (arba su kitais įrankiais):
 ```shell
-g++ -o program main.cpp funkcijos.cpp -O2
+g++ -o program main.cpp funkcijos.cpp struktura.cpp -O2
 ```
 Nuo versijos [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0) galima naudotis makefile komandomis:
 ```shell
@@ -93,7 +94,7 @@ n
 Programos darbas baigtas.
 ```
 
-### <a name="greitis1"></a>Testo rezultatai (1 variantas)
+### <a name="greitis1"></a>Testo rezultatai kopijavimo metodu (naudota struktūra)
 
 Testavimas (abiem atvejais) atliktas su:
 * CPU - Intel Core i5-4670 @3.40GHz
@@ -130,7 +131,7 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 | Abiejų grupių išvedimas | 0.00981       | 0.03780      | 0.28783       | 2.41950        | 27.1984         |
 | **Galutinis laikas**    | 0.02297       | 0.12393      | 1.00839       | 9.39640        | 101.605         |
 
-### <a name="greitis2"></a>Testo rezultatai (2 variantas)
+### <a name="greitis2"></a>Testo rezultatai ištrynimo metodu (naudota struktūra)
 Žemiau pavaizduoti testo rezultatai, kai tik blogiečiai perkeliami iš studentų konteinerio, geriečiai paliekami.
 
 #### Vector
@@ -163,6 +164,36 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 *Pora pastabų.* 
 * Testai atlikti su -O2 optimizavimo flag'u.
 * Nuskaitymas iš failo šiuo atveju kartu reiškia ir duomenų apdorojimą, kadangi nuskaitymo funkcija iš karto apdoroja kiekvieno studento duomenis (joje atliekami ir egzamino balo skaičiavimai). 
+
+## <a name="klase"></a>Klasės/struktūros greičio analizė
+
+Čia pavaizduoti testo rezultatai tarp klasės (kuri implementuota [v1.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai-naujas/releases/tag/v1.1)) ir struktūros (abu su -O2 flag'u).
+Testai atlikti ištrynimo metodu (tik viena grupė studentų perkeliami į naują konteinerį) su vektoriais.
+
+#### Struktūra
+
+| Etapas      | 100000 (10^5) | 1000000 (10^6) |
+|:----------- |:------------- |:-------------- |
+| Nuskaitymas | 0.53269       | 4.36868        |
+| Rūšiavimas  | 0.19589       | 2.20774        |
+| Išvedimas   | 0.23112       | 1.97343        |
+| **Viso**    | 0.96057       | 8.55309        |
+
+#### Klasė
+
+| Etapas      | 100000 (10^5) | 1000000 (10^6) |
+|:----------- |:------------- |:-------------- |
+| Nuskaitymas | 0.53268       | 4.33454        |
+| Rūšiavimas  | 0.18689       | 2.19274        |
+| Išvedimas   | 0.21486       | 2.02484        |
+| **Viso**    | 0.93543       | 8.55413        |
+
+### <a name="flag"></a>Optimizavimo lygio poveikis programos dydžiui
+
+| Implementacija  | O1    | O2    | O3    |
+|:--------------- |:----- |:----- |:----- |
+| Struktūra       | 549KB | 548KB | 553Kb |
+| Klasė           | 562KB | 555KB | 561Kb |
 
 ## Programos veikimas (kai pasirinkta neatlikti testo)
 

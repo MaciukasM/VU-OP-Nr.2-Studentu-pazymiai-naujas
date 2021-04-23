@@ -47,12 +47,12 @@ bool ArVienSkaiciai(const string s);
 bool ArEgzistuoja (string DuomFailas);
 string AtsakymoIvedimas();
 int IvedimasIntervale(int pradzia, int pabaiga, bool Breakinimui);
-double RaskVidurki (vector<int> pazymiai, int pazymiuSk);
-double RaskMediana (vector<int> pazymiai, int pazymiuSk);
+double RaskVidurki(int pazymiuSk, vector<int> pazymiai);
+double RaskMediana(int pazymiuSk, vector<int> pazymiai);
 double GalutinisBalas(double ndRez, int egzaminas);
 void GeneruokPazymius(Studentas &s);
 
-bool Lygink_5(Studentas &s1);
+bool Lygink_5(Studentas s1);
 
 template <class kont>
 void NuskaitykDuomenis (string DuomFailas, kont &studentai, bool &ArReikiaIvesti);
