@@ -3,6 +3,12 @@
 #include "laikas.h"
 #include "generavimas.h"
 
+bool Lygink_5(Studentas s1)
+{
+  return s1.getGalutinis() == 5;
+}
+
+
 //konteineriu rusiavimui
 template <class kont>
 void KontRusiavimas(kont &studentai)
@@ -77,8 +83,17 @@ int IvedimasIntervale(int pradzia, int pabaiga, bool Breakinimui) //bool kintama
   return skaicius;
 }
 
+//generavimo klases konstruktorius
+AtsitiktinisSk::AtsitiktinisSk() : mt{rd()} {}
+
+//skaičiaus generavimas
+int AtsitiktinisSk::Skaicius(int pradzia, int pabaiga) {
+    std::uniform_int_distribution<int> uid(pradzia, pabaiga);
+    return uid(mt);
+}
+
 //funkcija vidurkiui apskaiciuoti
-double RaskVidurki (vector<int> pazymiai, int pazymiuSk)
+double RaskVidurki(int pazymiuSk, vector<int> pazymiai)
 {
   double vidurkis=0;
   double suma; //pazymiu suma (double, kadangi reikes dalint)
@@ -94,7 +109,7 @@ double RaskVidurki (vector<int> pazymiai, int pazymiuSk)
 }
 
 //funkcija medianai apskaiciuoti
-double RaskMediana (vector<int> pazymiai, int pazymiuSk)
+double RaskMediana(int pazymiuSk, vector<int> pazymiai)
 {
   int temp;
   double mediana=0;
@@ -111,41 +126,6 @@ double RaskMediana (vector<int> pazymiai, int pazymiuSk)
     else mediana = (pazymiai[pazymiuSk/2] + pazymiai[pazymiuSk/2-1])/2;
   }
   return mediana;
-}
-
-//funkcija galutiniam balui apskaiciuoti
-double GalutinisBalas(double ndRez, int egzaminas)
-{
-  double galutinis;
-  galutinis = 0.4 * ndRez + 0.6 * egzaminas;
-  return galutinis;
-}
-
-//generavimo klases konstruktorius
-AtsitiktinisSk::AtsitiktinisSk() : mt{rd()} {}
-
-//skaičiaus generavimas
-int AtsitiktinisSk::Skaicius(int pradzia, int pabaiga) {
-    std::uniform_int_distribution<int> uid(pradzia, pabaiga);
-    return uid(mt);
-}
-
-//funkcija atsitiktiniams pazymiams (ir ju skaiciui) generuoti
-void GeneruokPazymius(Studentas &s) //pradzia/pabaiga - intervalo reziai
-{
-  AtsitiktinisSk generuok;
-
-  s.egzaminas = generuok.Skaicius(0,10);
-  s.pazymiuSk = generuok.Skaicius(0,20);
-  for (int i = 0; i < s.pazymiuSk; i++)
-  {
-    s.pazymiai.push_back(generuok.Skaicius(0,10));
-  }
-}
-
-bool Lygink_5(Studentas &s1)
-{
-  return s1.galutinis == 5;
 }
 
 //funkcija duomenu nuskaitymui is failo
@@ -165,29 +145,7 @@ void NuskaitykDuomenis(string DuomFailas, kont &studentai, bool &ArReikiaIvesti)
 
       Studentas s; //cia bus saugomi studento duomenys, pabaigoj bus pushinami i studentu vektoriu
 
-      ivedimas>>s.vardas;
-      ivedimas>>s.pavarde;
-
-      string ivestasSk; //tikrinimui, ar ivestas tinkamas skaicius
-      int pazymys=0;
-      while (ivedimas>>ivestasSk)
-      {
-        if (ArVienSkaiciai(ivestasSk))
-        {
-          pazymys = std::stoi(ivestasSk);
-          if((pazymys>=0)&&(pazymys<=10)) s.pazymiai.push_back(pazymys);
-        }
-      }
-      s.egzaminas = pazymys;
-      s.pazymiai.pop_back();
-
-      s.pazymiuSk = s.pazymiai.size();
-
-      s.ndVid = RaskVidurki(s.pazymiai, s.pazymiuSk);
-      s.mediana = RaskMediana(s.pazymiai, s.pazymiuSk);
-
-      s.galutinis = GalutinisBalas(s.ndVid, s.egzaminas);
-      s.galutinisMed = GalutinisBalas(s.mediana, s.egzaminas);
+      s.NuskaitykStudenta(ivedimas);
 
       studentai.push_back(s);
     }
@@ -210,8 +168,8 @@ template void NuskaitykDuomenis(string DuomFailas, deque <Studentas> &studentai,
 //funkcija rusiavimui pagal vardus (jei vardai sutampa, tai pagal pavardes)
 bool PagalVardus(Studentas s1, Studentas s2)
 {
-  if (s1.vardas < s2.vardas) return true;
-  else if (s1.vardas == s2.vardas && s1.pavarde < s2.pavarde) return true;
+  if (s1.getVardas() < s2.getVardas()) return true;
+  else if (s1.getVardas() == s2.getVardas() && s1.getPavarde() < s2.getPavarde()) return true;
   else return false;
 }
 
@@ -225,7 +183,7 @@ void DuomenuIsvedimasFaile (kont studentai, string failas)
   typename kont::iterator it = studentai.begin();
   for (int i = 0; i<studentai.size();i++)
   {
-    Isvedimas<<left<<setw(16)<<(*it).vardas<<setw(19)<<(*it).pavarde<<setw(20)<<setprecision(3)  <<(*it).galutinis<<setprecision(3)<<(*it).galutinisMed<<endl;
+    Isvedimas<<left<<setw(16)<<(*it).getVardas()<<setw(19)<<(*it).getPavarde()<<setw(20)<<setprecision(3)  <<(*it).getGalutinis()<<setprecision(3)<<(*it).getGalutinisMed()<<endl;
     it++;
   }
   std::ofstream Rezultatas(failas);
@@ -246,7 +204,7 @@ void IprastinisDuomIsvedimas (kont studentai)
   typename kont::iterator it = studentai.begin();
   for (int i = 0; i<studentai.size();i++)
   {
-    cout<<left<<setw(16)<<(*it).vardas<<setw(19)<<(*it).pavarde<<setw(20)<<setprecision(3)  <<(*it).galutinis<<setprecision(3)<<(*it).galutinisMed<<endl;
+    cout<<left<<setw(16)<<(*it).getVardas()<<setw(19)<<(*it).getPavarde()<<setw(20)<<setprecision(3)  <<(*it).getGalutinis()<<setprecision(3)<<(*it).getGalutinisMed()<<endl;
     it++;
   }
 }
@@ -274,18 +232,18 @@ void GeneruokFaila(int dydis)
   
   for (int i = 1; i <= dydis; i++)
   {
-    s.pazymiai.clear();
-    s.vardas = "Vardas"+to_string(i);
-    s.pavarde = "Pavarde"+to_string(i);
+    s.IsvalykPazymius();
+    s.setVardas("Vardas"+to_string(i));
+    s.setPavarde("Pavarde"+to_string(i));
 
-    duomenys<<left<<setw(16)<<s.vardas<<setw(25)<<s.pavarde;
+    duomenys<<left<<setw(16)<<s.getVardas()<<setw(25)<<s.getPavarde();
 
-    GeneruokPazymius(s);
-    for (int j = 0; j<s.pazymiuSk;j++)
+    s.GeneruokPazymius();
+    for (int j = 0; j<s.getPazymiuSk();j++)
     {
-      duomenys<<left<<setw(4)<<s.pazymiai[j];
+      duomenys<<left<<setw(4)<<s.getPazymys(j);
     }
-    duomenys<<setw(4)<<s.egzaminas<<endl;
+    duomenys<<setw(4)<<s.getEgzaminas()<<endl;
   }
 
   string DuomFailas = "Sugeneruotas" + to_string(dydis) + ".txt";
@@ -383,11 +341,15 @@ void ProgramosSparta(kont studentai, string konteineris)
       ProgramosTesinys = AtsakymoIvedimas();
       if (ProgramosTesinys=="n")
       {
+        blogieciai.clear();
+        gerieciai.clear();
+        studentai.clear();
         cout<<"Programos darbas baigtas."<<endl;
         break;
       }
       else
       {
+        studentai.clear();
         blogieciai.clear();
         gerieciai.clear();
       }
