@@ -10,7 +10,7 @@
 * [v0.4](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.4): ketvirtoji programos versija, kurioje studentai rūšiuojami į dvi grupes (geriečius ir blogiečius) pagal jų balus. Taip pat nuo šios versijos galima atlikti programos veikimo spartos testą (t.y. sugeneruojamas 10^n (n ∈ [3,7]) įrašų failas su studentais ir jų pažymiais; tuomet tie duomenys nuskaitomi ir apdorojami. Toliau seka studentų rūšiavimas į dvi minėtas grupes. Galiausiai abi šios grupės išvedamos į atitinkamus failus.).
 * [v0.5](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v0.5): penktoji programos versija, kurioje galima atlikti bandymus su įvairiais konteinerių tipais (t.y. atlikti ketvirtoje versijoje implementuotą programos veikimo spartos testą su konteineriais std::list bei std::deque (prieš tai testas buvo atliekamas su std::vector tipo konteineriu). Testo rezultatus ir komentarus galima peržiūrėti žemiau (žr. [Programos spartos veikimo testas](#greitis)).
 * [v1.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0): šioje versijoje pridėtas makefile, taip pat patobulintas konteinerių spartos testavimas - dabar galima pasirinkti, kurį iš dviejų metodų naudos programa; t.y. ar studentai bus skirstomi į du naujus (geriečių ir blogiečių) konteinerius, ar į naują konteinerį bus perkelti tik blogiečiai. Šie metodai buvo pratestuoti, rezultatus galima peržiūrėti žemiau (žr. [Testo rezultatai kopijavimo metodu](#greitis1) bei [Testo rezultatai ištrynimo metodu](#greitis2)).
-* [v1.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0): šioje versijoje programa pertvarkyta taip, kad vietoje struktūros būtų naudojama klasė. Eksperimentinės analizės rezultatus (t.y. greičio tarp struktūros ir klasės bei skirtingų optimizavimo flag'ų) galima peržiūrėti žemiau (žr. [Klasės/struktūros greičio analizė](#klase) ir [Optimizavimo lygio poveikis programai](#flag)).
+* [v1.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai/releases/tag/v1.0): šioje versijoje programa pertvarkyta taip, kad vietoje struktūros būtų naudojama klasė. Eksperimentinės analizės rezultatus (t.y. greičio tarp struktūros ir klasės bei skirtingų optimizavimo flag'ų) galima peržiūrėti žemiau (žr. [Klasės/struktūros greičio analizė](#klase) ir [Optimizavimo lygio poveikis programos dydžiui](#flag)).
 
 ## Diegimas
 
@@ -167,7 +167,33 @@ Nuo v1.0 versijos galima rinktis, kaip skirstomi studentai, **čia pavaizduotas 
 
 ## <a name="klase"></a>Klasės/struktūros greičio analizė
 
-### <a name="flag"></a>Optimizavimo lygio poveikis programai
+Čia pavaizduoti testo rezultatai tarp klasės (kuri implementuota v1.1) ir struktūros (abu su -O2 flag'u).
+Testai atlikti ištrynimo metodu (tik viena grupė studentų perkeliami į naują konteinerį) su vektoriais.
+
+#### Struktūra
+
+| Etapas      | 100000 (10^5) | 1000000 (10^6) |
+|:----------- |:------------- |:-------------- |
+| Nuskaitymas | 0.53269       | 4.36868        |
+| Rūšiavimas  | 0.19589       | 2.20774        |
+| Išvedimas   | 0.23112       | 1.97343        |
+| **Viso**    | 0.96057       | 8.55309        |
+
+#### Klasė
+
+| Etapas      | 100000 (10^5) | 1000000 (10^6) |
+|:----------- |:------------- |:-------------- |
+| Nuskaitymas | 0.53268       | 4.33454        |
+| Rūšiavimas  | 0.18689       | 2.19274        |
+| Išvedimas   | 0.21486       | 2.02484        |
+| **Viso**    | 0.93543       | 8.55413        |
+
+### <a name="flag"></a>Optimizavimo lygio poveikis programos dydžiui
+
+| Implementacija  | O1    | O2    | O3    |
+|:--------------- |:----- |:----- |:----- |
+| Struktūra       | 549KB | 548KB | 553Kb |
+| Klasė           | 562KB | 555KB | 561Kb |
 
 ## Programos veikimas (kai pasirinkta neatlikti testo)
 
