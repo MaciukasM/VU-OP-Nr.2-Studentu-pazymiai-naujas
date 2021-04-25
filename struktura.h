@@ -11,12 +11,28 @@ class Studentas
     string vardas;
     string pavarde;
     int pazymiuSk;
-    vector <int>pazymiai; 
+    vector <int> *pazymiai; 
     int egzaminas; //egzamino rezultatas
     double galutinis;
     double galutinisMed;
   public:
-    Studentas() : egzaminas{0} {};
+    //rule of five realizacija
+
+      //konstruktorius/destruktorius
+      Studentas();
+      ~Studentas();
+      //konstruktorius/destruktorius
+
+      Studentas(const Studentas &s); //kopijavimas per konstruktoriu
+      Studentas& operator= (const Studentas &s); //kopijavimas per operatoriu
+      
+      Studentas (Studentas &&s); //move per konstruktoriu
+      Studentas& operator= (Studentas &&s); //move per operatoriu
+
+    //rule of five realizacija
+    
+    bool operator < (const Studentas &kitas) { return this->galutinis<kitas.galutinis;} //lyginimo (per galutini bala) operatorius
+
     Studentas(std::istream& ivedimas); //skaitymui is failo
 
     string getVardas() const { return vardas; }
@@ -28,11 +44,11 @@ class Studentas
     int getEgzaminas() const { return egzaminas; }
     void setEgzaminas(int egzaminas) { this->egzaminas = egzaminas; }
 
-    int getPazymys(int i) const { return pazymiai[i]; }
+    int getPazymys(int i) const { return (*pazymiai)[i]; }
     int getPazymiuSk() const { return pazymiuSk; }
-    void setPazymys(int pazymys) { pazymiai.push_back(pazymys); }
+    void setPazymys(int pazymys) { (*pazymiai).push_back(pazymys); }
     void setPazymiuSk(int pazymiuSk) { this->pazymiuSk = pazymiuSk; }
-    void removePazymys() { pazymiai.pop_back(); }
+    void removePazymys() { (*pazymiai).pop_back(); }
 
     double getGalutinis() const { return galutinis; }
     double getGalutinisMed() const { return galutinisMed; }
@@ -41,8 +57,6 @@ class Studentas
     void IsvalykPazymius();
     void NuskaitykStudenta(std::istringstream& ivedimas);
     void GalutinisBalas(bool vidurkis);
-
-    bool operator < (const Studentas &kitas) { return this->galutinis<kitas.galutinis;}
 };
 
 #endif
