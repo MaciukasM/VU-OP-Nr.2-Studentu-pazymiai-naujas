@@ -30,6 +30,7 @@ using std::to_string;
 using std::deque;
 using std::list;
 using std::find_if;
+using std::move;
 
 //atsitiktiniams skaiciams
 using std::mt19937;
