@@ -5,7 +5,24 @@
 #include "generavimas.h"
 #include "laikas.h"
 
-class Studentas
+//bazine klase 
+class Zmogus
+{
+  protected:
+    string vardas;
+    string pavarde;
+
+    Zmogus(string vardas ="", string pavarde="");
+
+    virtual string getVardas() const = 0;
+    virtual void setVardas(string vardas) = 0;
+
+    virtual string getPavarde() const = 0;
+    virtual void setPavarde(string pavarde) = 0;
+};
+
+//isvestine klase
+class Studentas : public Zmogus
 {
   private:
     string vardas;
