@@ -1,5 +1,7 @@
 #include "struktura.h"
 
+Zmogus::Zmogus(string vardas, string pavarde) : vardas{vardas}, pavarde{pavarde} {}
+
 //-------------------------------------------------
 //rule of five realizacija
 
@@ -10,8 +12,7 @@ Studentas::~Studentas() { delete pazymiai; }
 
 //kopijavimas per konstruktoriu
 Studentas::Studentas(const Studentas &s) : 
-  vardas{s.vardas},
-  pavarde{s.pavarde},
+  Zmogus{s.vardas, s.pavarde},
   pazymiuSk{s.pazymiuSk},
   pazymiai{ new vector<int>(*(s.pazymiai)) },
   egzaminas{s.egzaminas},
@@ -41,8 +42,7 @@ Studentas& Studentas::operator= (const Studentas &s)
 
 //move per konstruktoriu
 Studentas::Studentas (Studentas &&s) :
-  vardas{move(s.vardas)},
-  pavarde{move(s.pavarde)},
+  Zmogus{move(s.vardas), move(s.pavarde)},
   pazymiuSk{move(s.pazymiuSk)},
   pazymiai{move(s.pazymiai)},
   egzaminas{move(s.egzaminas)},
