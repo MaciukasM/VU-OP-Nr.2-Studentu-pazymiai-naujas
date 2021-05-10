@@ -96,7 +96,7 @@ int AtsitiktinisSk::Skaicius(int pradzia, int pabaiga) {
 double RaskVidurki(int pazymiuSk, vector<int> pazymiai)
 {
   double vidurkis=0;
-  double suma; //pazymiu suma (double, kadangi reikes dalint)
+  double suma = 0; //pazymiu suma (double, kadangi reikes dalint)
   for (int i=0;i<pazymiuSk;i++)
   {
     suma = suma + pazymiai.at(i);
