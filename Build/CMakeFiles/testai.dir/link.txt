@@ -1,0 +1,3 @@
+"D:\Program Files (x86)\data\VU\2 pusmetis\Objektinis programavimas\cmake\bin\cmake.exe" -E rm -f CMakeFiles\testai.dir/objects.a
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe cr CMakeFiles\testai.dir/objects.a @CMakeFiles\testai.dir\objects1.rsp
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\X86_64~2.EXE -O2 -g -Wl,--whole-archive CMakeFiles\testai.dir/objects.a -Wl,--no-whole-archive -o testai.exe -Wl,--out-implib,libtestai.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\testai.dir\linklibs.rsp

@@ -1,0 +1,7 @@
+add_test( Vidurkis.RaskVidurki C:/Users/manta/Desktop/2.0/VU-OP-Nr.2-Studentu-pazymiai-naujas/Build/testai.exe [==[--gtest_filter=Vidurkis.RaskVidurki]==] --gtest_also_run_disabled_tests)
+set_tests_properties( Vidurkis.RaskVidurki PROPERTIES WORKING_DIRECTORY C:/Users/manta/Desktop/2.0/VU-OP-Nr.2-Studentu-pazymiai-naujas/Build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test( Mediana.RaskMediana C:/Users/manta/Desktop/2.0/VU-OP-Nr.2-Studentu-pazymiai-naujas/Build/testai.exe [==[--gtest_filter=Mediana.RaskMediana]==] --gtest_also_run_disabled_tests)
+set_tests_properties( Mediana.RaskMediana PROPERTIES WORKING_DIRECTORY C:/Users/manta/Desktop/2.0/VU-OP-Nr.2-Studentu-pazymiai-naujas/Build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test( Simboliai.ArVienSkaiciai C:/Users/manta/Desktop/2.0/VU-OP-Nr.2-Studentu-pazymiai-naujas/Build/testai.exe [==[--gtest_filter=Simboliai.ArVienSkaiciai]==] --gtest_also_run_disabled_tests)
+set_tests_properties( Simboliai.ArVienSkaiciai PROPERTIES WORKING_DIRECTORY C:/Users/manta/Desktop/2.0/VU-OP-Nr.2-Studentu-pazymiai-naujas/Build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set( testai_TESTS Vidurkis.RaskVidurki Mediana.RaskMediana Simboliai.ArVienSkaiciai)
