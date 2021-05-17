@@ -13,6 +13,7 @@
 * [v1.1](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai-naujas/releases/tag/v1.1): šioje versijoje programa pertvarkyta taip, kad vietoje struktūros būtų naudojama klasė. Eksperimentinės analizės rezultatus (t.y. greičio tarp struktūros ir klasės bei skirtingų optimizavimo flag'ų) galima peržiūrėti žemiau (žr. [Klasės/struktūros greičio analizė](#klase) ir [Optimizavimo lygio poveikis programos dydžiui](#flag)).
 * [v1.2](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai-naujas/releases/tag/v1.2): programoje realizuotas rule of five - destruktorius + copy per konstruktorių/operatorių + move per konstruktorių/operatorių.
 * [v1.5](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai-naujas/releases/tag/v1.5): sukurta bazinė abstrakčioji klasė Žmogus, klasė Studentas - iš jos išvestinė (derived).
+* [v2.0](https://github.com/MantasM2001/VU-OP-Nr.2-Studentu-pazymiai-naujas/releases/tag/v2.0): darbas apipavidalintas su doxygen bei įkelti install failai.
 
 ## Diegimas
 
